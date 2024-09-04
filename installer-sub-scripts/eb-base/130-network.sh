@@ -81,7 +81,7 @@ dnf $APT_PROXY -y install nftables
 cp etc/dnsmasq.d/$TAG-hosts /etc/dnsmasq.d/
 cp etc/dnsmasq.d/$TAG-resolv /etc/dnsmasq.d/
 #[[ -z "$(egrep '^DNSMASQ_EXCEPT' /etc/dnsmasq)" ]] && \
-    sed -i "s/^#DNSMASQ_EXCEPT/DNSMASQ_EXCEPT/" /etc/dnsmasq
+#    sed -i "s/^#DNSMASQ_EXCEPT/DNSMASQ_EXCEPT/" /etc/dnsmasq
 
 # /etc/network/interfaces
 [[ -z "$(egrep "^source-directory\s*interfaces.d" /etc/network/interfaces || true)" ]] && \
