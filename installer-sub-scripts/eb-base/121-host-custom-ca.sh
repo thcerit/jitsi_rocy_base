@@ -26,7 +26,7 @@ echo "---------------------- HOST CUSTOM CA ---------------------"
 export DEBIAN_FRONTEND=noninteractive
 
 # added packages
-apt-get $APT_PROXY -y install openssl
+dnf $APT_PROXY -y install openssl
 
 # ------------------------------------------------------------------------------
 # CA CERTIFICATE & KEY
