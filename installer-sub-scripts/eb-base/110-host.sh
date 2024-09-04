@@ -48,9 +48,9 @@ export DEBIAN_FRONTEND=noninteractive
 
 # upgrade
 dnf install -y epel-release
-apt-get $APT_PROXY -yd dist-upgrade
-apt-get $APT_PROXY -y upgrade
-apt-get $APT_PROXY -y install apt-utils
+# dnf $APT_PROXY -yd dist-upgrade
+dnf $APT_PROXY -y upgrade
+dnf $APT_PROXY -y install apt-utils
 
 # added packages
 dnf $APT_PROXY -y install lxc bridge-utils
