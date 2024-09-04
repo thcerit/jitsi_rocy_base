@@ -55,6 +55,6 @@ dnf $APT_PROXY -y install apt-utils
 # added packages
 dnf $APT_PROXY -y install lxc bridge-utils
 dnf $APT_PROXY -y install dnsmasq dnsutils
-dnf $APT_PROXY -y install xz-utils gnupg pwgen
+dnf $APT_PROXY -y install xz gnupg pwgen
 dnf $APT_PROXY -y install wget curl ca-certificates
 dnf $APT_PROXY -y install iputils-ping
