@@ -15,7 +15,7 @@ cd $MACHINES/$MACH
 # ------------------------------------------------------------------------------
 # INIT
 # ------------------------------------------------------------------------------
-[[ "$DONT_RUN_HOST" = true ]] && exit
+# [[ "$DONT_RUN_HOST" = true ]] && exit
 
 echo
 echo "-------------------------- HOST ---------------------------"
@@ -37,7 +37,7 @@ dpkg -l >> $OLD_FILES/dpkg.status
 # ------------------------------------------------------------------------------
 # PACKAGES
 # ------------------------------------------------------------------------------
-export DEBIAN_FRONTEND=noninteractive
+# export DEBIAN_FRONTEND=noninteractive
 
 # load the bridge module before the possible kernel update
 [[ -n "$(command -v modprobe)" ]] && [[ -z "$(lsmod | grep bridge)" ]] && \
