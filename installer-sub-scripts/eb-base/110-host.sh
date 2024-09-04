@@ -48,7 +48,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 # upgrade
 dnf install -y epel-release
-# dnf $APT_PROXY -yd dist-upgrade
+dnf $APT_PROXY -y update
 dnf $APT_PROXY -y upgrade
 dnf $APT_PROXY -y install apt-utils
 
