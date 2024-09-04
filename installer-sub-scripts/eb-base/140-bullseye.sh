@@ -113,16 +113,16 @@ done
 lxc-attach -n $MACH -- bash <<EOS
 set -e
 export DEBIAN_FRONTEND=noninteractive
-apt-get -y --allow-releaseinfo-change update
-apt-get $APT_PROXY -y dist-upgrade
+dnf -y --allow-releaseinfo-change update
+dnf $APT_PROXY -y dist-upgrade
 EOS
 
 # packages
 lxc-attach -n $MACH -- bash <<EOS
 set -e
 export DEBIAN_FRONTEND=noninteractive
-apt-get $APT_PROXY -y install apt-utils
-apt-get $APT_PROXY -y install zsh
+dnf $APT_PROXY -y install apt-utils
+dnf $APT_PROXY -y install zsh
 EOS
 
 lxc-attach -n $MACH -- zsh <<EOS
