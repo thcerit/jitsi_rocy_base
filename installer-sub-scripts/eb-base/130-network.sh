@@ -80,8 +80,8 @@ dnf $APT_PROXY -y install nftables
 # changed/added system files
 cp etc/dnsmasq.d/$TAG-hosts /etc/dnsmasq.d/
 cp etc/dnsmasq.d/$TAG-resolv /etc/dnsmasq.d/
-[[ -z "$(egrep '^DNSMASQ_EXCEPT' /etc/default/dnsmasq)" ]] && \
-    sed -i "s/^#DNSMASQ_EXCEPT/DNSMASQ_EXCEPT/" /etc/default/dnsmasq
+[[ -z "$(egrep '^DNSMASQ_EXCEPT' /etc/dnsmasq)" ]] && \
+    sed -i "s/^#DNSMASQ_EXCEPT/DNSMASQ_EXCEPT/" /etc/dnsmasq
 
 # /etc/network/interfaces
 [[ -z "$(egrep "^source-directory\s*interfaces.d" /etc/network/interfaces || true)" ]] && \
@@ -115,7 +115,7 @@ sysctl -p /etc/sysctl.d/$TAG-ip-forward.conf || true
 # ------------------------------------------------------------------------------
 # LXC-NET
 # ------------------------------------------------------------------------------
-cp etc/default/lxc-net /etc/default/
+cp etc/lxc-net /etc/
 systemctl restart lxc-net.service
 
 # ------------------------------------------------------------------------------
