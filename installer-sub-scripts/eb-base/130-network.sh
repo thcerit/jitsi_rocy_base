@@ -49,8 +49,8 @@ mkdir -p $OLD_FILES
 # backup the files which will be changed
 [[ -f /etc/nftables.conf ]] && cp /etc/nftables.conf $OLD_FILES/
 [[ -f /etc/network/interfaces ]] && cp /etc/network/interfaces $OLD_FILES/
-[[ -f /etc/default/dnsmasq ]] && cp /etc/default/dnsmasq $OLD_FILES/
-[[ -f /etc/default/lxc-net ]] && cp /etc/default/lxc-net $OLD_FILES/
+[[ -f /etc/dnsmasq ]] && cp /etc/dnsmasq $OLD_FILES/
+[[ -f /etc/lxc-net ]] && cp /etc/lxc-net $OLD_FILES/
 [[ -f /etc/dnsmasq.d/$TAG-hosts ]] && cp /etc/dnsmasq.d/$TAG-hosts $OLD_FILES/
 
 # network status
