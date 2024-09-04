@@ -72,7 +72,7 @@ fi
 export DEBIAN_FRONTEND=noninteractive
 
 # added packages
-apt-get $APT_PROXY -y install nftables
+dnf $APT_PROXY -y install nftables
 
 # ------------------------------------------------------------------------------
 # NETWORK CONFIG
