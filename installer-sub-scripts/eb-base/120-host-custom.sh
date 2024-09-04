@@ -26,7 +26,7 @@ echo "---------------------- HOST CUSTOM ------------------------"
 export DEBIAN_FRONTEND=noninteractive
 
 # upgrade
-dnf $APT_PROXY -yd dist-upgrade
+dnf $APT_PROXY -y dist-upgrade
 dnf $APT_PROXY -y upgrade
 
 # added packages
