@@ -12,6 +12,7 @@
 #    export DONT_RUN_HOST=true
 #    export BRIDGE="br0"
 # ------------------------------------------------------------------------------
+export DONT_RUN_HOST=true
 export BASEDIR=$(pwd)
 
 # The first argument is the template name and we need it.
@@ -25,7 +26,7 @@ fi
 export TAG="eb"
 export BASE_TEMPLATE="$TAG-base"
 export BASE_CONFIG="${BASE_TEMPLATE}.conf"
-export BASE_REPO="https://github.com/serdar28/emrah-bullseye-base.git"
+export BASE_REPO="https://github.com/thcerit/jitsi_rocy_base.git"
 export APP_TEMPLATE="$(echo $1 | sed 's/\.conf$//')"
 export APP_CONFIG="${APP_TEMPLATE}.conf"
 export LOGGER="https://checkmyport.emrah.com"
@@ -108,10 +109,10 @@ trap on_exit EXIT
 # ------------------------------------------------------------------------------
 # BASE PACKAGES
 # ------------------------------------------------------------------------------
-apt-get $APT_PROXY update
-apt-get $APT_PROXY -y install wget curl rsync
-apt-get $APT_PROXY -y install dnsutils
-apt-get $APT_PROXY -y install git
+dnf $APT_PROXY update
+dnf $APT_PROXY -y install wget curl rsync
+dnf $APT_PROXY -y install dnsutils
+dnf $APT_PROXY -y install git
 
 curl -sf "$LOGGER/?text=$APP_TEMPLATE-started" || true
 
