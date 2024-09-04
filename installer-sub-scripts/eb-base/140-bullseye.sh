@@ -91,7 +91,7 @@ sleep 1
 # PACKAGES
 # ------------------------------------------------------------------------------
 # ca-certificates for https repo
-apt-get $APT_PROXY \
+dnf $APT_PROXY \
     -o dir::cache::archives="/usr/local/$TAG/cache/bullseye-apt-archives/" \
     -dy reinstall iputils-ping ca-certificates openssl
 
@@ -128,10 +128,10 @@ EOS
 lxc-attach -n $MACH -- zsh <<EOS
 set -e
 export DEBIAN_FRONTEND=noninteractive
-apt-get $APT_PROXY -y install openssh-server openssh-client
-apt-get $APT_PROXY -y install cron logrotate
-apt-get $APT_PROXY -y install dbus libpam-systemd
-apt-get $APT_PROXY -y install wget
+dnf $APT_PROXY -y install openssh-server openssh-client
+dnf $APT_PROXY -y install cron logrotate
+dnf $APT_PROXY -y install dbus libpam-systemd
+dnf $APT_PROXY -y install wget
 EOS
 
 # ------------------------------------------------------------------------------
