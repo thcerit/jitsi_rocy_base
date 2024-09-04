@@ -33,7 +33,7 @@ dnf $APT_PROXY -y upgrade
 dnf $APT_PROXY -y install zsh tmux vim autojump
 dnf $APT_PROXY -y install htop iotop bmon bwm-ng
 dnf $APT_PROXY -y install fping whois
-dnf $APT_PROXY -y install net-tools ngrep ncat
+dnf $APT_PROXY -y install net-tools ngrep nmap-ncat
 dnf $APT_PROXY -y install rsync
 dnf $APT_PROXY -y install bzip2 ack jq
 dnf $APT_PROXY -y install rsyslog
