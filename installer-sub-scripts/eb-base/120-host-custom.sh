@@ -26,17 +26,17 @@ echo "---------------------- HOST CUSTOM ------------------------"
 export DEBIAN_FRONTEND=noninteractive
 
 # upgrade
-apt-get $APT_PROXY -yd dist-upgrade
-apt-get $APT_PROXY -y upgrade
+dnf $APT_PROXY -yd dist-upgrade
+dnf $APT_PROXY -y upgrade
 
 # added packages
-apt-get $APT_PROXY -y install zsh tmux vim autojump
-apt-get $APT_PROXY -y install htop iotop bmon bwm-ng
-apt-get $APT_PROXY -y install fping whois
-apt-get $APT_PROXY -y install net-tools ngrep ncat
-apt-get $APT_PROXY -y install rsync
-apt-get $APT_PROXY -y install bzip2 ack jq
-apt-get $APT_PROXY -y install rsyslog
+dnf $APT_PROXY -y install zsh tmux vim autojump
+dnf $APT_PROXY -y install htop iotop bmon bwm-ng
+dnf $APT_PROXY -y install fping whois
+dnf $APT_PROXY -y install net-tools ngrep ncat
+dnf $APT_PROXY -y install rsync
+dnf $APT_PROXY -y install bzip2 ack jq
+dnf $APT_PROXY -y install rsyslog
 
 # ------------------------------------------------------------------------------
 # ROOT USER
