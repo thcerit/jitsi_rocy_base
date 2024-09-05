@@ -12,7 +12,6 @@
 #    export DONT_RUN_HOST=true
 #    export BRIDGE="br0"
 # ------------------------------------------------------------------------------
-export DONT_RUN_HOST=true
 export BASEDIR=$(pwd)
 
 # The first argument is the template name and we need it.
@@ -70,6 +69,7 @@ if [[ "root" != "$(whoami)" ]]; then
     exit 1
 fi
 
+DONT_CHECK_OS_RELEASE=true
 # If the OS release is unsupported, cancel the installation.
 if [[ "$DONT_CHECK_OS_RELEASE" != true ]] && \
    [[ -z "$(grep "$RELEASE" /etc/os-release)" ]]; then
