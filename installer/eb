@@ -109,7 +109,7 @@ trap on_exit EXIT
 # ------------------------------------------------------------------------------
 # BASE PACKAGES
 # ------------------------------------------------------------------------------
-dnf $APT_PROXY update
+dnf $APT_PROXY -y update
 dnf $APT_PROXY -y install wget curl rsync
 dnf $APT_PROXY -y install dnsutils
 dnf $APT_PROXY -y install git
