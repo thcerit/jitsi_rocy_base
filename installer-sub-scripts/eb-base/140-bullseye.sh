@@ -125,7 +125,11 @@ apt $APT_PROXY -y install apt-utils
 apt $APT_PROXY -y install zsh
 EOS
 
-if [ !(lxc-ls --fancy | grep 172 ]
+while [ !(lxc-ls --fancy | grep 172 ]
+do
+    sleep 5
+done
+
 lxc-attach -n $MACH -- bash <<EOS
 set -e
 export DEBIAN_FRONTEND=noninteractive
