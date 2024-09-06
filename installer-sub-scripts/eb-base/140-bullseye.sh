@@ -128,7 +128,8 @@ EOS
 lxc-attach -n $MACH -- zsh <<EOS
 set -e
 export DEBIAN_FRONTEND=noninteractive
-apt $APT_PROXY -y install openssh-server openssh-client
+apt $APT_PROXY -y update
+apt $APT_PROXY -y install ssh
 apt $APT_PROXY -y install cron logrotate
 apt $APT_PROXY -y install dbus libpam-systemd
 apt $APT_PROXY -y install wget
