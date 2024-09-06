@@ -125,7 +125,7 @@ apt $APT_PROXY -y install apt-utils
 apt $APT_PROXY -y install zsh
 EOS
 
-while [ !(lxc-ls --fancy | grep 172 ]
+while [ !(lxc-ls --fancy | grep 172) ]
 do
     sleep 5
 done
