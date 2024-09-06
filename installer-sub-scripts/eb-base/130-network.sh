@@ -91,7 +91,7 @@ sysctl -p /etc/sysctl.d/$TAG-ip-forward.conf || true
 # ------------------------------------------------------------------------------
 # LXC-NET
 # ------------------------------------------------------------------------------
-# cp etc/lxc-net /etc/
+cp etc/lxc-net /etc/
 systemctl restart lxc-net.service
 
 # ------------------------------------------------------------------------------
@@ -99,11 +99,6 @@ systemctl restart lxc-net.service
 # ------------------------------------------------------------------------------
 # the random MAC address for the dummy interface
 MAC_ADDRESS=$(date +'52:54:%d:%H:%M:%S')
-
-cp etc/network/interfaces.d/$TAG-bridge.cfg /etc/NetworkManager/system-connections/
-sed -i "s/___MAC_ADDRESS___/${MAC_ADDRESS}/g" \
-    /etc/NetworkManager/system-connections/$TAG-bridge.cfg
-sed -i "s/___BRIDGE___/${BRIDGE}/g" /etc/network/interfaces.d/$TAG-bridge.cfg
 
 cp etc/dnsmasq.d/$TAG-interface /etc/dnsmasq.d/
 sed -i "s/___BRIDGE___/${BRIDGE}/g" /etc/dnsmasq.d/$TAG-interface
@@ -116,10 +111,8 @@ MAC_ADDRESS=$(date +'52:54:%d:%H:%M:%S')
 # Rocy create dummy0 interface
 nmcli connection add type dummy ifname dummy0 ethernet.mac-address $MAC_ADDRESS
 
-
-
-ifup -i /etc/network/interfaces.d/$TAG-bridge.cfg dummy0
-ifup -i /etc/network/interfaces.d/$TAG-bridge.cfg $BRIDGE
+ifup dummy0
+ifup $TAG
 
 # ------------------------------------------------------------------------------
 # NFTABLES
