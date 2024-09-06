@@ -125,7 +125,7 @@ apt $APT_PROXY -y install apt-utils
 apt $APT_PROXY -y install zsh
 EOS
 
-lxc-attach -n $MACH <<EOS
+lxc-attach -n $MACH -- bash <<EOS
 set -e
 export DEBIAN_FRONTEND=noninteractive
 apt $APT_PROXY -y update
@@ -139,7 +139,7 @@ EOS
 # SYSTEM CONFIGURATION
 # ------------------------------------------------------------------------------
 # tzdata
-lxc-attach -n $MACH -- zsh <<EOS
+lxc-attach -n $MACH -- bash <<EOS
 set -e
 echo $TIMEZONE > /etc/timezone
 rm -f /etc/localtime
