@@ -125,7 +125,7 @@ apt $APT_PROXY -y install apt-utils
 apt $APT_PROXY -y install zsh
 EOS
 
-lxc-attach -n $MACH -- zsh <<EOS
+lxc-attach -n $MACH <<EOS
 set -e
 export DEBIAN_FRONTEND=noninteractive
 apt $APT_PROXY -y update
