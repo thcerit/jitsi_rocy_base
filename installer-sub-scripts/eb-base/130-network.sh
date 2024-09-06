@@ -83,29 +83,10 @@ cp etc/dnsmasq.d/$TAG-resolv /etc/dnsmasq.d/
 #[[ -z "$(egrep '^DNSMASQ_EXCEPT' /etc/dnsmasq)" ]] && \
 #    sed -i "s/^#DNSMASQ_EXCEPT/DNSMASQ_EXCEPT/" /etc/dnsmasq
 
-# /etc/network/interfaces
-[[ -z "$(egrep "^source-directory\s*interfaces.d" /etc/network/interfaces || true)" ]] && \
-[[ -z "$(egrep "^source-directory\s*/etc/network/interfaces.d" /etc/network/interfaces || true)" ]] && \
-[[ -z "$(egrep "^source\s*interfaces.d/\*$" /etc/network/interfaces || true)" ]] && \
-[[ -z "$(egrep "^source\s*/etc/network/interfaces.d/\*$" /etc/network/interfaces || true)" ]] && \
-[[ -z "$(egrep "^source\s*interfaces.d/\*\.cfg" /etc/network/interfaces || true)" ]] && \
-[[ -z "$(egrep "^source\s*/etc/network/interfaces.d/\*\.cfg" /etc/network/interfaces || true)" ]] && \
-[[ -z "$(egrep "^source\s*interfaces.d/$TAG-bridge.cfg" /etc/network/interfaces || true)" ]] && \
-[[ -z "$(egrep "^source\s*/etc/network/interfaces.d/$TAG-bridge.cfg" /etc/network/interfaces || true)" ]] && \
-echo -e "\nsource /etc/network/interfaces.d/$TAG-bridge.cfg" >> /etc/network/interfaces
+# Rocy create vSwitch
+nmcli connection add type bridge ifname br0 con-name br0 ipv4.method manual ipv4.addresses "172.22.22.1/24"
 
-# /etc/network/cloud-interfaces-template
-if [[ -f "/etc/network/cloud-interfaces-template" ]]; then
-    [[ -z "$(egrep "^source-directory\s*interfaces.d" /etc/network/cloud-interfaces-template || true)" ]] && \
-    [[ -z "$(egrep "^source-directory\s*/etc/network/interfaces.d" /etc/network/cloud-interfaces-template || true)" ]] && \
-    [[ -z "$(egrep "^source\s*interfaces.d/\*$" /etc/network/cloud-interfaces-template || true)" ]] && \
-    [[ -z "$(egrep "^source\s*/etc/network/interfaces.d/\*$" /etc/network/cloud-interfaces-template || true)" ]] && \
-    [[ -z "$(egrep "^source\s*interfaces.d/\*\.cfg" /etc/network/cloud-interfaces-template || true)" ]] && \
-    [[ -z "$(egrep "^source\s*/etc/network/interfaces.d/\*\.cfg" /etc/network/cloud-interfaces-template || true)" ]] && \
-    [[ -z "$(egrep "^source\s*interfaces.d/$TAG-bridge.cfg" /etc/network/cloud-interfaces-template || true)" ]] && \
-    [[ -z "$(egrep "^source\s*/etc/network/interfaces.d/$TAG-bridge.cfg" /etc/network/cloud-interfaces-template || true)" ]] && \
-    echo -e "\nsource /etc/network/interfaces.d/$TAG-bridge.cfg" >> /etc/network/cloud-interfaces-template
-fi
+
 
 # IP forwarding
 cp etc/sysctl.d/$TAG-ip-forward.conf /etc/sysctl.d/
