@@ -111,7 +111,7 @@ MAC_ADDRESS=$(date +'52:54:%d:%H:%M:%S')
 # Rocy create dummy0 interface
 nmcli connection add type dummy ifname dummy0 ethernet.mac-address $MAC_ADDRESS
 
-ifup dummy0
+ifup dummy-dummy0
 ifup $TAG
 
 # ------------------------------------------------------------------------------
