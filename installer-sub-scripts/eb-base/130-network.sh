@@ -83,11 +83,6 @@ cp etc/dnsmasq.d/$TAG-resolv /etc/dnsmasq.d/
 #[[ -z "$(egrep '^DNSMASQ_EXCEPT' /etc/dnsmasq)" ]] && \
 #    sed -i "s/^#DNSMASQ_EXCEPT/DNSMASQ_EXCEPT/" /etc/dnsmasq
 
-# Rocy create vSwitch
-nmcli connection add type bridge ifname $TAG con-name $TAG ipv4.method manual ipv4.addresses "172.22.22.1/24"
-
-
-
 # IP forwarding
 cp etc/sysctl.d/$TAG-ip-forward.conf /etc/sysctl.d/
 sysctl -p /etc/sysctl.d/$TAG-ip-forward.conf || true
@@ -105,12 +100,23 @@ systemctl restart lxc-net.service
 # the random MAC address for the dummy interface
 MAC_ADDRESS=$(date +'52:54:%d:%H:%M:%S')
 
-cp etc/network/interfaces.d/$TAG-bridge.cfg /etc/network/interfaces.d/
+cp etc/network/interfaces.d/$TAG-bridge.cfg /etc/NetworkManager/system-connections/
 sed -i "s/___MAC_ADDRESS___/${MAC_ADDRESS}/g" \
-    /etc/network/interfaces.d/$TAG-bridge.cfg
+    /etc/NetworkManager/system-connections/$TAG-bridge.cfg
 sed -i "s/___BRIDGE___/${BRIDGE}/g" /etc/network/interfaces.d/$TAG-bridge.cfg
+
 cp etc/dnsmasq.d/$TAG-interface /etc/dnsmasq.d/
 sed -i "s/___BRIDGE___/${BRIDGE}/g" /etc/dnsmasq.d/$TAG-interface
+
+# Rocy create vSwitch
+nmcli connection add type bridge ifname $TAG con-name $TAG ipv4.method manual ipv4.addresses "172.22.22.1/24"
+
+# the random MAC address for the dummy interface
+MAC_ADDRESS=$(date +'52:54:%d:%H:%M:%S')
+# Rocy create dummy0 interface
+nmcli connection add type dummy ifname dummy0 ethernet.mac-address $MAC_ADDRESS
+
+
 
 ifup -i /etc/network/interfaces.d/$TAG-bridge.cfg dummy0
 ifup -i /etc/network/interfaces.d/$TAG-bridge.cfg $BRIDGE
