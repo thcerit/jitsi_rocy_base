@@ -72,7 +72,7 @@ fi
 export DEBIAN_FRONTEND=noninteractive
 
 # added packages
-dnf $APT_PROXY -y install nftables
+dnf $APT_PROXY -y install nftables NetworkManager-initscripts-updown
 
 # ------------------------------------------------------------------------------
 # NETWORK CONFIG
