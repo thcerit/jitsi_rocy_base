@@ -16,6 +16,8 @@ echo "-------------------------- SOURCE -------------------------"
 # PRE-SOURCE PACKAGES
 # ------------------------------------------------------------------------------
 export DEBIAN_FRONTEND=noninteractive
+dnf install -y epel-release
+dnf install -y dpkg
 dnf $APT_PROXY -y install procps
 
 # ------------------------------------------------------------------------------
