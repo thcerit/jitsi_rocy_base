@@ -84,7 +84,7 @@ cp etc/dnsmasq.d/$TAG-resolv /etc/dnsmasq.d/
 #    sed -i "s/^#DNSMASQ_EXCEPT/DNSMASQ_EXCEPT/" /etc/dnsmasq
 
 # Rocy create vSwitch
-nmcli connection add type bridge ifname br0 con-name br0 ipv4.method manual ipv4.addresses "172.22.22.1/24"
+nmcli connection add type bridge ifname$TAG-bridge con-name $TAG-bridge ipv4.method manual ipv4.addresses "172.22.22.1/24"
 
 
 
@@ -96,7 +96,7 @@ sysctl -p /etc/sysctl.d/$TAG-ip-forward.conf || true
 # ------------------------------------------------------------------------------
 # LXC-NET
 # ------------------------------------------------------------------------------
-cp etc/lxc-net /etc/
+# cp etc/lxc-net /etc/
 systemctl restart lxc-net.service
 
 # ------------------------------------------------------------------------------
