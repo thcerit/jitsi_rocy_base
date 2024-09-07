@@ -60,7 +60,7 @@ mkdir -p $SHARED/cache
 wget http://ftp.de.debian.org/debian/pool/main/i/iputils/iputils-ping_20210202-1_amd64.deb
 wget http://ftp.de.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20210119_all.deb
 wget http://ftp.de.debian.org/debian/pool/main/o/openssl/openssl_1.1.1w-0+deb11u1_amd64.deb
-cp -arp *.deb $SHARED/cache/
+cp -arp *.deb $SHARED/cache/bullseye-apt-archives/
 
 # container config
 rm -rf $ROOTFS/var/cache/apt/archives
