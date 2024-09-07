@@ -125,10 +125,7 @@ apt $APT_PROXY -y install apt-utils
 apt $APT_PROXY -y install zsh
 EOS
 
-while [ !(lxc-ls --fancy | grep 172) ]
-do
-    sleep 5
-done
+sleep 30
 
 lxc-attach -n $MACH -- bash <<EOS
 set -e
