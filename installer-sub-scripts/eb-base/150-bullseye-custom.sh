@@ -11,8 +11,7 @@ MACH="$TAG-bullseye"
 cd $MACHINES/$MACH
 
 ROOTFS="/var/lib/lxc/$MACH/rootfs"
-echo "nameserver 8.8.8.8" > resolv.conf
-cp resolv.conf $ROOTFS/etc/
+
 # ------------------------------------------------------------------------------
 # INIT
 # ------------------------------------------------------------------------------
@@ -27,7 +26,7 @@ lxc-start -n $MACH -d
 lxc-wait -n $MACH -s RUNNING
 
 # wait for the network to be up
-for i in $(seq 0 19); do
+for i in $(seq 0 29); do
     lxc-attach -n $MACH -- ping -c1 host.loc && break || true
     sleep 2
 done
@@ -37,6 +36,7 @@ done
 # ------------------------------------------------------------------------------
 # update
 lxc-attach -n $MACH -- zsh <<EOS
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
 set -e
 export DEBIAN_FRONTEND=noninteractive
 
