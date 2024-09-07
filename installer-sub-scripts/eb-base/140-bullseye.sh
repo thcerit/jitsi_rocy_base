@@ -85,19 +85,17 @@ cp etc/apt/apt.conf.d/80disable-recommends $ROOTFS/etc/apt/apt.conf.d/
 # start container
 lxc-start -n $MACH -d
 lxc-wait -n $MACH -s RUNNING
-sleep 30
+sleep 1
 
 # ------------------------------------------------------------------------------
 # PACKAGES
 # ------------------------------------------------------------------------------
 # ca-certificates for https repo
-### apt command cant run in ROCY LINUX! ###
-apt $APT_PROXY \
-    -o dir::cache::archives="/usr/local/$TAG/cache/bullseye-apt-archives/" \
-    -dy reinstall iputils-ping ca-certificates openssl
+wget https://ftp.de.debian.org/debian/pool/main/i/iputils/iputils-ping_20210202-1_amd64.deb
+wget https://ftp.de.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20210119_all.deb
+wget https://ftp.de.debian.org/debian/pool/main/o/openssl/openssl_1.1.1w-0+deb11u1_amd64.deb
 
-
-/var/lib/lxc/eb-bullseye/rootfs/
+cp *.deb $ROOTFS/usr/local/eb/cache/bullseye-apt-archives/
 
 lxc-attach -n $MACH -- bash <<EOS
 ip a
