@@ -44,7 +44,7 @@ for i in 1 2 3; do
     apt -y --allow-releaseinfo-change update && sleep 3 && break
 done
 
-apt $APT_PROXY -y system-upgrade
+apt $APT_PROXY -y full-upgrade
 EOS
 
 # packages
