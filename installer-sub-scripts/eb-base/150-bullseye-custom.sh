@@ -41,21 +41,21 @@ export DEBIAN_FRONTEND=noninteractive
 
 for i in 1 2 3; do
     sleep 1
-    dnf -y --allow-releaseinfo-change update && sleep 3 && break
+    apt -y --allow-releaseinfo-change update && sleep 3 && break
 done
 
-dnf $APT_PROXY -y system-upgrade
+apt $APT_PROXY -y system-upgrade
 EOS
 
 # packages
 lxc-attach -n $MACH -- zsh <<EOS
 set -e
 export DEBIAN_FRONTEND=noninteractive
-dnf $APT_PROXY -y install less tmux vim autojump
-dnf $APT_PROXY -y install curl dnsutils
-dnf $APT_PROXY -y install net-tools ngrep nmap-ncat
-dnf $APT_PROXY -y install htop bmon bwm-ng
-dnf $APT_PROXY -y install rsync bzip2 man-db ack
+apt $APT_PROXY -y install less tmux vim autojump
+apt $APT_PROXY -y install curl dnsutils
+apt $APT_PROXY -y install net-tools ngrep nmap-ncat
+apt $APT_PROXY -y install htop bmon bwm-ng
+apt $APT_PROXY -y install rsync bzip2 man-db ack
 EOS
 
 # ------------------------------------------------------------------------------
