@@ -96,6 +96,7 @@ apt $APT_PROXY \
     -dy reinstall iputils-ping ca-certificates openssl
 
 lxc-attach -n $MACH -- bash <<EOS
+ip a
 echo "sleep 30"
 sleep 30
 set -e
