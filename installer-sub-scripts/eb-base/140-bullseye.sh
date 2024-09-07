@@ -100,8 +100,6 @@ sleep 1
 
 lxc-attach -n $MACH -- bash <<EOS
 ip a
-echo "sleep 30"
-sleep 30
 set -e
 export DEBIAN_FRONTEND=noninteractive
 dpkg -i \$(ls -1t /var/cache/apt/archives/openssl_* | head -1)
