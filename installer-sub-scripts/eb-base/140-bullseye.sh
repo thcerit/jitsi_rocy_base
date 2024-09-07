@@ -57,7 +57,10 @@ echo $SHARED
 echo $TAG
 # shared directories
 mkdir -p $SHARED/cache
-cp -arp $MACHINE_HOST/usr/local/$TAG/cache/bullseye-apt-archives $SHARED/cache/
+wget http://ftp.de.debian.org/debian/pool/main/i/iputils/iputils-ping_20210202-1_amd64.deb
+wget http://ftp.de.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20210119_all.deb
+wget http://ftp.de.debian.org/debian/pool/main/o/openssl/openssl_1.1.1w-0+deb11u1_amd64.deb
+cp -arp *.deb $SHARED/cache/
 
 # container config
 rm -rf $ROOTFS/var/cache/apt/archives
@@ -92,12 +95,6 @@ sleep 1
 # ------------------------------------------------------------------------------
 # PACKAGES
 # ------------------------------------------------------------------------------
-# ca-certificates for https repo
-wget http://ftp.de.debian.org/debian/pool/main/i/iputils/iputils-ping_20210202-1_amd64.deb
-wget http://ftp.de.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20210119_all.deb
-wget http://ftp.de.debian.org/debian/pool/main/o/openssl/openssl_1.1.1w-0+deb11u1_amd64.deb
-
-cp *.deb $ROOTFS/usr/local/eb/cache/bullseye-apt-archives/
 
 lxc-attach -n $MACH -- bash <<EOS
 ip a
