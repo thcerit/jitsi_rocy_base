@@ -56,7 +56,7 @@ echo `pwd`
 echo $SHARED
 echo $TAG
 # shared directories
-mkdir -p $SHARED/cache
+mkdir -p $SHARED/cache/bullseye-apt-archives/
 wget http://ftp.de.debian.org/debian/pool/main/i/iputils/iputils-ping_20210202-1_amd64.deb
 wget http://ftp.de.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20210119_all.deb
 wget http://ftp.de.debian.org/debian/pool/main/o/openssl/openssl_1.1.1w-0+deb11u1_amd64.deb
@@ -115,8 +115,6 @@ done
 
 # update
 lxc-attach -n $MACH -- bash <<EOS
-echo "sleep 30"
-sleep 30
 set -e
 export DEBIAN_FRONTEND=noninteractive
 apt -y --allow-releaseinfo-change update
@@ -125,8 +123,6 @@ EOS
 
 # packages
 lxc-attach -n $MACH -- bash <<EOS
-echo "sleep 30"
-sleep 30
 set -e
 export DEBIAN_FRONTEND=noninteractive
 apt $APT_PROXY -y install apt-utils
@@ -134,8 +130,6 @@ apt $APT_PROXY -y install zsh
 EOS
 
 lxc-attach -n $MACH -- bash <<EOS
-echo "sleep 30"
-sleep 30
 set -e
 export DEBIAN_FRONTEND=noninteractive
 apt $APT_PROXY -y update
