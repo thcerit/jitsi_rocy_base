@@ -98,10 +98,8 @@ sleep 1
 
 lxc-attach -n $MACH -- bash <<EOS
 ip a
-cat /etc/resolv.conf
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
-dhclient
-sleep 20
+sleep 10
 ip a
 set -e
 export DEBIAN_FRONTEND=noninteractive
