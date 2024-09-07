@@ -54,7 +54,7 @@ set -e
 export DEBIAN_FRONTEND=noninteractive
 apt $APT_PROXY -y install less tmux vim autojump
 apt $APT_PROXY -y install curl dnsutils
-apt $APT_PROXY -y install net-tools ngrep nmap-ncat
+apt $APT_PROXY -y install net-tools ngrep ncat
 apt $APT_PROXY -y install htop bmon bwm-ng
 apt $APT_PROXY -y install rsync bzip2 man-db ack
 EOS
