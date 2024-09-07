@@ -101,6 +101,7 @@ sleep 1
 lxc-attach -n $MACH -- bash <<EOS
 ip a
 cat /etc/resolv.conf
+echo "nameserver 8.8.8.8" >> /etc/resolv.conf
 sleep 20
 ip a
 set -e
