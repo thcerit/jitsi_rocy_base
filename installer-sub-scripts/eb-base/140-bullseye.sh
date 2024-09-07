@@ -111,6 +111,7 @@ done
 
 # update
 lxc-attach -n $MACH -- bash <<EOS
+sleep 30
 set -e
 export DEBIAN_FRONTEND=noninteractive
 apt -y --allow-releaseinfo-change update
@@ -119,13 +120,12 @@ EOS
 
 # packages
 lxc-attach -n $MACH -- bash <<EOS
+sleep 30
 set -e
 export DEBIAN_FRONTEND=noninteractive
 apt $APT_PROXY -y install apt-utils
 apt $APT_PROXY -y install zsh
 EOS
-
-sleep 30
 
 lxc-attach -n $MACH -- bash <<EOS
 set -e
