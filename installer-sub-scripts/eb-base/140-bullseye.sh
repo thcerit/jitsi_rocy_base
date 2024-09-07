@@ -96,6 +96,8 @@ apt $APT_PROXY \
     -dy reinstall iputils-ping ca-certificates openssl
 
 lxc-attach -n $MACH -- bash <<EOS
+echo "sleep 30"
+sleep 30
 set -e
 export DEBIAN_FRONTEND=noninteractive
 dpkg -i \$(ls -1t /var/cache/apt/archives/openssl_* | head -1)
@@ -111,6 +113,7 @@ done
 
 # update
 lxc-attach -n $MACH -- bash <<EOS
+echo "sleep 30"
 sleep 30
 set -e
 export DEBIAN_FRONTEND=noninteractive
@@ -120,6 +123,7 @@ EOS
 
 # packages
 lxc-attach -n $MACH -- bash <<EOS
+echo "sleep 30"
 sleep 30
 set -e
 export DEBIAN_FRONTEND=noninteractive
@@ -128,6 +132,8 @@ apt $APT_PROXY -y install zsh
 EOS
 
 lxc-attach -n $MACH -- bash <<EOS
+echo "sleep 30"
+sleep 30
 set -e
 export DEBIAN_FRONTEND=noninteractive
 apt $APT_PROXY -y update
