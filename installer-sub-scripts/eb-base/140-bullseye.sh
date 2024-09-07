@@ -109,9 +109,9 @@ dpkg -i \$(ls -1t /var/cache/apt/archives/iputils-ping_* | head -1)
 EOS
 
 # wait for the network to be up
-for i in $(seq 0 9); do
+for i in $(seq 0 29); do
     lxc-attach -n $MACH -- ping -c1 host.loc && break || true
-    sleep 1
+    sleep 2
 done
 
 # update
