@@ -50,7 +50,7 @@ set -e
 rm -rf /var/cache/lxc/download/debian/bullseye/$ARCH/default
 
 # create the new one
-lxc-create -n $MACH -t download -P /var/lib/lxc/ -- \
+lxc-create -t download -n $MACH -P /var/lib/lxc/ -- \
     -d debian -r bullseye -a $ARCH
 
 # shared directories
@@ -85,7 +85,7 @@ cp etc/apt/apt.conf.d/80disable-recommends $ROOTFS/etc/apt/apt.conf.d/
 # start container
 lxc-start -n $MACH -d
 lxc-wait -n $MACH -s RUNNING
-sleep 1
+sleep 30
 
 # ------------------------------------------------------------------------------
 # PACKAGES
