@@ -52,7 +52,7 @@ rm -rf /var/cache/lxc/download/debian/bullseye/$ARCH/default
 # create the new one
 lxc-create -t download -n $MACH -P /var/lib/lxc/ -- \
     -d debian -r bullseye -a $ARCH
-
+echo `pwd`
 # shared directories
 mkdir -p $SHARED/cache
 cp -arp $MACHINE_HOST/usr/local/$TAG/cache/bullseye-apt-archives $SHARED/cache/
@@ -91,9 +91,13 @@ sleep 30
 # PACKAGES
 # ------------------------------------------------------------------------------
 # ca-certificates for https repo
+### apt command cant run in ROCY LINUX! ###
 apt $APT_PROXY \
     -o dir::cache::archives="/usr/local/$TAG/cache/bullseye-apt-archives/" \
     -dy reinstall iputils-ping ca-certificates openssl
+
+
+/var/lib/lxc/eb-bullseye/rootfs/
 
 lxc-attach -n $MACH -- bash <<EOS
 ip a
