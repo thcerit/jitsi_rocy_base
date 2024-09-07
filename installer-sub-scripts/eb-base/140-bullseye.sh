@@ -53,6 +53,8 @@ rm -rf /var/cache/lxc/download/debian/bullseye/$ARCH/default
 lxc-create -t download -n $MACH -P /var/lib/lxc/ -- \
     -d debian -r bullseye -a $ARCH
 echo `pwd`
+echo $SHARED
+echo $TAG
 # shared directories
 mkdir -p $SHARED/cache
 cp -arp $MACHINE_HOST/usr/local/$TAG/cache/bullseye-apt-archives $SHARED/cache/
