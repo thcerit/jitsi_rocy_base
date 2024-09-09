@@ -49,7 +49,7 @@ mkdir -p $OLD_FILES
 # backup the files which will be changed
 [[ -f /etc/nftables.conf ]] && cp /etc/nftables.conf $OLD_FILES/
 [[ -f /etc/network/interfaces ]] && cp /etc/network/interfaces $OLD_FILES/
-#[[ -f /etc/dnsmasq ]] && cp /etc/dnsmasq $OLD_FILES/
+[[ -f /etc/dnsmasq.conf ]] && cp /etc/dnsmasq.conf $OLD_FILES/
 [[ -f /etc/lxc-net ]] && cp /etc/lxc-net $OLD_FILES/
 [[ -f /etc/dnsmasq.d/$TAG-hosts ]] && cp /etc/dnsmasq.d/$TAG-hosts $OLD_FILES/
 
@@ -80,8 +80,8 @@ dnf $APT_PROXY -y install nftables NetworkManager-initscripts-updown
 # changed/added system files
 cp etc/dnsmasq.d/$TAG-hosts /etc/dnsmasq.d/
 cp etc/dnsmasq.d/$TAG-resolv /etc/dnsmasq.d/
-#[[ -z "$(egrep '^DNSMASQ_EXCEPT' /etc/dnsmasq)" ]] && \
-#    sed -i "s/^#DNSMASQ_EXCEPT/DNSMASQ_EXCEPT/" /etc/dnsmasq
+[[ -z "$(egrep '^DNSMASQ_EXCEPT' /etc/dnsmasq.conf)" ]] && \
+    sed -i "s/^#DNSMASQ_EXCEPT/DNSMASQ_EXCEPT/" /etc/dnsmasq.conf
 
 # IP forwarding
 cp etc/sysctl.d/$TAG-ip-forward.conf /etc/sysctl.d/
@@ -97,19 +97,20 @@ systemctl restart lxc-net.service
 # ------------------------------------------------------------------------------
 # DUMMY INTERFACE & BRIDGE
 # ------------------------------------------------------------------------------
-# the random MAC address for the dummy interface
-MAC_ADDRESS=$(date +'52:54:%d:%H:%M:%S')
-
-cp etc/dnsmasq.d/$TAG-interface /etc/dnsmasq.d/
-sed -i "s/___BRIDGE___/${BRIDGE}/g" /etc/dnsmasq.d/$TAG-interface
-
-# Rocy create vSwitch
-nmcli connection add type bridge ifname $TAG con-name $TAG ipv4.method manual ipv4.addresses "172.22.22.1/24"
 
 # the random MAC address for the dummy interface
 MAC_ADDRESS=$(date +'52:54:%d:%H:%M:%S')
 # Rocy create dummy0 interface
 nmcli connection add type dummy ifname dummy0 ethernet.mac-address $MAC_ADDRESS
+
+# the random MAC address for the bridge interface
+MAC_ADDRESS=$(date +'52:54:%d:%H:%M:%S')
+# Rocy create bridge copy from /etc/NetworkManager/system-connections/eb.nmconnection to /etc/dnsmasq.d/
+nmcli connection add type bridge ifname $TAG con-name $TAG ipv4.method manual ipv4.addresses "172.22.22.1/24" ethernet.mac-address $MAC_ADDRESS
+cp /etc/NetworkManager/system-connections/eb.nmconnection /etc/dnsmasq.d/
+
+cp etc/dnsmasq.d/$TAG-interface /etc/dnsmasq.d/
+sed -i "s/___BRIDGE___/${BRIDGE}/g" /etc/dnsmasq.d/$TAG-interface
 
 nmcli connection up dummy-dummy0
 nmcli connection up $TAG
@@ -192,7 +193,7 @@ systemctl start dnsmasq.service
 
 # nftables
 systemctl enable nftables.service
-
+systemctl start nftables.service
 # ------------------------------------------------------------------------------
 # STATUS
 # ------------------------------------------------------------------------------
