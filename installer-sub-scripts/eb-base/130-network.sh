@@ -107,7 +107,6 @@ nmcli connection add type dummy ifname dummy0 ethernet.mac-address $MAC_ADDRESS
 MAC_ADDRESS=$(date +'52:54:%d:%H:%M:%S')
 # Rocy create bridge copy from /etc/NetworkManager/system-connections/eb.nmconnection to /etc/dnsmasq.d/
 nmcli connection add type bridge ifname $TAG con-name $TAG ipv4.method manual ipv4.addresses "172.22.22.1/24" ethernet.mac-address $MAC_ADDRESS
-cp /etc/NetworkManager/system-connections/eb.nmconnection /etc/dnsmasq.d/
 
 cp etc/dnsmasq.d/$TAG-interface /etc/dnsmasq.d/
 sed -i "s/___BRIDGE___/${BRIDGE}/g" /etc/dnsmasq.d/$TAG-interface
