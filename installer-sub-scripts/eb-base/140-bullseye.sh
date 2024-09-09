@@ -116,6 +116,7 @@ done
 
 # update
 lxc-attach -n $MACH -- bash <<EOS
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
 set -e
 export DEBIAN_FRONTEND=noninteractive
 apt -y --allow-releaseinfo-change update
@@ -124,6 +125,7 @@ EOS
 
 # packages
 lxc-attach -n $MACH -- bash <<EOS
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
 set -e
 export DEBIAN_FRONTEND=noninteractive
 apt $APT_PROXY -y install apt-utils
@@ -131,6 +133,7 @@ apt $APT_PROXY -y install zsh
 EOS
 
 lxc-attach -n $MACH -- bash <<EOS
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
 set -e
 export DEBIAN_FRONTEND=noninteractive
 apt $APT_PROXY -y update
@@ -145,6 +148,7 @@ EOS
 # ------------------------------------------------------------------------------
 # tzdata
 lxc-attach -n $MACH -- bash <<EOS
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
 set -e
 echo $TIMEZONE > /etc/timezone
 rm -f /etc/localtime
