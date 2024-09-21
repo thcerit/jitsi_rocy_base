@@ -52,6 +52,7 @@ EOS
 lxc-attach -n $MACH -- zsh <<EOS
 set -e
 export DEBIAN_FRONTEND=noninteractive
+apt-get -y update
 apt $APT_PROXY -y install less tmux vim autojump
 apt $APT_PROXY -y install curl dnsutils
 apt $APT_PROXY -y install net-tools ngrep ncat
