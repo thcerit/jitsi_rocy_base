@@ -46,6 +46,17 @@ export LOGGER="https://checkmyport.emrah.com"
 [[ -z "$RELEASE" ]] && export RELEASE="bullseye"
 [[ -z "$FREE_SPACE_NEEDED" ]] && export FREE_SPACE_NEEDED="1000000"
 
+# NTP configuration
+dnf $APT_PROXY -y install chrony
+systemctl enable --now chronyd
+echo "server 0.pool.ntp.org iburst" >> /etc/chrony.conf
+echo "server 1.pool.ntp.org iburst" >> /etc/chrony.conf
+echo "server 2.pool.ntp.org iburst" >> /etc/chrony.conf
+echo "server 3.pool.ntp.org iburst" >> /etc/chrony.conf
+sudo systemctl restart chronyd
+timedatectl set-ntp true
+# NTP configuration
+
 # ------------------------------------------------------------------------------
 # STATUS
 # ------------------------------------------------------------------------------
