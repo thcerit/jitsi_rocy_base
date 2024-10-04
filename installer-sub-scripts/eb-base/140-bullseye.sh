@@ -119,8 +119,8 @@ lxc-attach -n $MACH -- bash <<EOS
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 set -e
 export DEBIAN_FRONTEND=noninteractive
-apt -y --allow-releaseinfo-change update
-apt $APT_PROXY -y dist-upgrade
+apt-get -y --allow-releaseinfo-change update
+apt-get $APT_PROXY -y dist-upgrade
 EOS
 
 # packages
@@ -128,26 +128,26 @@ lxc-attach -n $MACH -- bash <<EOS
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 set -e
 export DEBIAN_FRONTEND=noninteractive
-apt $APT_PROXY -y install apt-utils
-apt $APT_PROXY -y install zsh
+apt-get $APT_PROXY -y install apt-utils
+apt-get $APT_PROXY -y install zsh
 EOS
 
-lxc-attach -n $MACH -- bash <<EOS
+lxc-attach -n $MACH -- zsh <<EOS
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 set -e
 export DEBIAN_FRONTEND=noninteractive
-apt $APT_PROXY -y update
-apt $APT_PROXY -y install ssh
-apt $APT_PROXY -y install cron logrotate
-apt $APT_PROXY -y install dbus libpam-systemd
-apt $APT_PROXY -y install wget
+apt-get $APT_PROXY -y update
+apt-get $APT_PROXY -y install ssh
+apt-get $APT_PROXY -y install cron logrotate
+apt-get $APT_PROXY -y install dbus libpam-systemd
+apt-get $APT_PROXY -y install wget
 EOS
 
 # ------------------------------------------------------------------------------
 # SYSTEM CONFIGURATION
 # ------------------------------------------------------------------------------
 # tzdata
-lxc-attach -n $MACH -- bash <<EOS
+lxc-attach -n $MACH -- zsh <<EOS
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 set -e
 echo $TIMEZONE > /etc/timezone
